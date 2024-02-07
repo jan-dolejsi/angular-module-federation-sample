@@ -71,3 +71,7 @@ npx ng generate component module-a/feature --standalone --style css --project mf
 Add a router link to the Home component to navigate to the Feature component.
 
 To test the micro-frontend as a standalone Angualar app, point your browser to <http://localhost:4201/>
+
+## Register Micro-frontend in the App Shell
+
+add webpack exposes/remotes configuration. See commit #.
