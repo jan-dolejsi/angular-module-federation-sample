@@ -25,6 +25,11 @@ Then in the `remote_app_shell` subfolder:
 npx ng serve
 ```
 
+1. replace the [app.component.html](./remote_app_shell/src/app/app.component.html) `<p>Host application</p>`,
+2. add `routerLink` to navigate to `/mfe1` and the router outlet.
+
+Point your browser to <http://localhost:3200/>
+
 ## Microfrontend
 
 ```bash
@@ -42,3 +47,27 @@ Then in the `mfe1` subfolder:
 ```bash
 npx ng serve
 ```
+
+Replace the [app.component.html](./mfe1/src/app/app.component.html) `<p>Standalone Micro-frontend 1</p>` and the router outlet.
+
+Create the module that will become the micro-frontend exposed for remote consumption:
+
+```bash
+npx ng generate module module-a --project mfe1 --routing --routing-scope Child
+```
+
+Add simple _home_ component to the module A:
+
+```bash
+npx ng generate component module-a/home --standalone --style css --project mfe1
+```
+
+Add simple _feature_ component to the module A (the one that will require dependency injection later):
+
+```bash
+npx ng generate component module-a/feature --standalone --style css --project mfe1
+```
+
+Add a router link to the Home component to navigate to the Feature component.
+
+To test the micro-frontend as a standalone Angualar app, point your browser to <http://localhost:4201/>
