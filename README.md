@@ -147,6 +147,10 @@ Now you need to build the `ngx-my-components` component library before serving t
 npx ng build --project ngx-my-components && npx ng serve
 ```
 
+This is what you should see in the standalone (left) and remote app shell (right):
+
+![Correctly working app after the web component library separation](doc/after-web-component-library-project-sepratation.png)
+
 ## Add _Mass-communication_ service that depends on the _Hello World_ service
 
 Let's exercise a service-to-service dependency. The `MassCommunication` service is to wrap
