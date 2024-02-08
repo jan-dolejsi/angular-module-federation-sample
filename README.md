@@ -5,6 +5,14 @@ This repo is the least repro sample to show the dependency injection issue I am 
 The sample uses Angular 16.
 The general approach is described in [Dynamic Module Federation with Angular](https://www.angulararchitects.io/en/blog/dynamic-module-federation-with-angular/).
 
+## Running the sample
+
+|            | App shell                              | Micro-frontend |
+| ---------- | -------------------------------------- | -------------- |
+| sub-folder | [/remote_app_shell](/remote_app_shell) | [/mfe1](/mfe1) |
+| serve      | cd remote_app_shell && npx ng serve    | cd mfe1 && npx ng serve |
+| browse     | <http://localhost:3200/>               | <http://localhost:4201/> |
+
 Here are the steps how to reproduce this:
 
 ## App shell
@@ -74,4 +82,11 @@ To test the micro-frontend as a standalone Angualar app, point your browser to <
 
 ## Register Micro-frontend in the App Shell
 
-add webpack exposes/remotes configuration. See commit #.
+Add webpack exposes/remotes configuration. The vital configuration is spread across following files:
+
+/mfe1/webpack.config.js -> see the `exposes` field\
+/remote_app_shell .. webpack.config.js -> see the `remotes` field\
+/remote_app_shell .. app-routing.module.ts -> adds the lazy-loaded mfe1 routes
+/remote_app_shell .. declarations.d.ts -> declare the remote module for the tsc compiler's sake
+
+See commit # TBD for more detail.
