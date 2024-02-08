@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HelloService } from '../hello.service';
+import { MassCommunicationService } from '../mass-communication.service';
 
 @Component({
   selector: 'mfe1-feature',
@@ -13,7 +13,7 @@ export class FeatureComponent {
 
   greeting = '';
 
-  constructor(private helloService: HelloService) {
-    this.greeting = helloService.greet('World');
+  constructor(private greetingService: MassCommunicationService) {
+    this.greeting = greetingService.greetAll(['Alice', 'Bob', 'Charlie']);
   }
 }

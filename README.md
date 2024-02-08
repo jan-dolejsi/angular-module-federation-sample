@@ -146,3 +146,27 @@ Now you need to build the `ngx-my-components` component library before serving t
 ```bash
 npx ng build --project ngx-my-components && npx ng serve
 ```
+
+## Add _Mass-communication_ service that depends on the _Hello World_ service
+
+Let's exercise a service-to-service dependency. The `MassCommunication` service is to wrap
+the capability of the `HelloService`.
+
+Then in the `mfe1` subfolder:
+
+```bash
+npx ng generate service mass-communication --project ngx-my-components --skip-tests
+```
+
+And add the `greetAll(names: string[])` method.\
+Use it in the `FeatureComponent` instead of `HelloService` to bulk greet _Alice_, _Bob_ and _Charlie_.
+
+> Service-to-service injection (with an anstract service being injected) works in the Standalone Angular app,
+> but fail in the federated module with this error:
+> `NullInjectorError: R3InjectorError(Standalone[FeatureComponent])[MassCommunicationService -> MassCommunicationService -> MassCommunicationService -> HelloService -> HelloService]: 
+  NullInjectorError: No provider for HelloService!`
+
+![NullInjectorError](doc/NullInjectorError.png)
+
+So the question is: Is there a way to setup the dependency injection to make it work in the module loaded into the app shell via its remoteEntry?
+Or is there some additional configuration one has to do in the remote entry setup, so that the dependency injection works as expected?
