@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { FeatureComponent } from './feature/feature.component';
+import { FeatureComponent, HelloService } from 'ngx-my-components';
 import { HomeComponent } from './home/home.component';
-import { HelloService } from './hello.service';
 import { FrenchHelloService } from './french.hello.service';
 
 export const MODULE_A_ROUTES: Routes = [

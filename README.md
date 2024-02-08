@@ -10,7 +10,7 @@ The general approach is described in [Dynamic Module Federation with Angular](ht
 |            | App shell                              | Micro-frontend |
 | ---------- | -------------------------------------- | -------------- |
 | sub-folder | [/remote_app_shell](/remote_app_shell) | [/mfe1](/mfe1) |
-| serve      | cd remote_app_shell && npx ng serve    | cd mfe1 && npx ng serve |
+| serve      | cd remote_app_shell && npx ng serve    | cd mfe1 && npx ng build --project ngx-my-components && npx ng serve |
 | browse     | <http://localhost:3200/>               | <http://localhost:4201/> |
 
 Here are the steps how to reproduce this:
@@ -107,6 +107,8 @@ Inject it into the `FeatureComponent` to show _Hello, World_.
 Suppose the `FeatureComponent` could be used in different contexts with the data coming from different kinds of data sources.
 The dependency injection in the Module-A could then inject the appropriate implementation of the abstract service.
 
+Inside the `mfe1` subfolder:
+
 ```bash
 npx ng generate service module-a/french.hello --project mfe1 --skip-tests
 ```
@@ -116,3 +118,31 @@ and make the `BonjoursService` extend and implement it.
 
 The protected `capitalize(name)` method in the `HelloService` is also added to demonstrate
 that the service base class may provide some base capability for all the derived service (i.e. the language mutations).
+
+## Split the MFE module to MFE and Web Component library
+
+For re-usability, you may want to keep your (Angular) web components in a separate library project (which you could also publish as such in NPM).
+
+Inside the `mfe1` subfolder:
+
+```bash
+npx ng generate library ngx-my-components --standalone --prefix mywc
+```
+
+Delete the component and service that was created inside `mfe1/projects/ngx-my-components` (and from the `public-api.ts`).
+
+Instead, move the `mfe1\src\app\module-a\feature` folder to `mfe1/projects/ngx-my-components/src/lib` and export the `feature/feature.component` via the `mfe1/projects/ngx-my-components/src/public-api.ts`.
+
+Same with the `hello.service.ts`. Move that also to `ngx-my-components/src/lib`, because the `FeatureComponent` depends on it.
+
+Adjust the imports in the module-a files to:
+
+```typescript
+import { HelloService, FeatureComponent } from 'ngx-my-components';
+```
+
+Now you need to build the `ngx-my-components` component library before serving the `mfe1`.
+
+```bash
+npx ng build --project ngx-my-components && npx ng serve
+```
