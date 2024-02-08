@@ -90,3 +90,14 @@ Add webpack exposes/remotes configuration. The vital configuration is spread acr
 /remote_app_shell .. declarations.d.ts -> declare the remote module for the tsc compiler's sake
 
 See commit # TBD for more detail.
+
+## Add _Hello World_ services and inject it to the component
+
+Then in the `mfe1` subfolder:
+
+```bash
+npx ng generate service module-a/hello --project mfe1 --skip-tests
+```
+
+And add the `greet(name: string)` method.\
+Inject it into the `FeatureComponent` to show _Hello, World_.

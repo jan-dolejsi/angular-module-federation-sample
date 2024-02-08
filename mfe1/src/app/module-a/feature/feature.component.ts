@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HelloService } from '../hello.service';
 
 @Component({
   selector: 'mfe1-feature',
@@ -10,4 +11,9 @@ import { CommonModule } from '@angular/common';
 })
 export class FeatureComponent {
 
+  greeting = '';
+
+  constructor(private helloService: HelloService) {
+    this.greeting = helloService.greet('World');
+  }
 }
