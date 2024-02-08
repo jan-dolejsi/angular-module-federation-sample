@@ -101,3 +101,18 @@ npx ng generate service module-a/hello --project mfe1 --skip-tests
 
 And add the `greet(name: string)` method.\
 Inject it into the `FeatureComponent` to show _Hello, World_.
+
+## Make the _Hello World_ service derive from an abstract service
+
+Suppose the `FeatureComponent` could be used in different contexts with the data coming from different kinds of data sources.
+The dependency injection in the Module-A could then inject the appropriate implementation of the abstract service.
+
+```bash
+npx ng generate service module-a/french.hello --project mfe1 --skip-tests
+```
+
+Make the original `HelloService` service `abstract` (both the class and the method)
+and make the `BonjoursService` extend and implement it.
+
+The protected `capitalize(name)` method in the `HelloService` is also added to demonstrate
+that the service base class may provide some base capability for all the derived service (i.e. the language mutations).

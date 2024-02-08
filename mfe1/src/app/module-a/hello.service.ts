@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class HelloService {
+export abstract class HelloService {
 
   constructor() { }
 
-  greet(name: string): string {
-    return `Hello, ${name}`;
+  abstract greet(name: string): string;
+
+  protected capitalize(name: string): string {
+    return name.toUpperCase();
   }
 }
