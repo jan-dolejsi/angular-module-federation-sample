@@ -17,6 +17,18 @@ Here are the steps how to reproduce this:
 
 ## App shell
 
+### How to run the sample
+
+```bash
+cd remote_app_shell
+npm install
+npx ng serve
+```
+
+### How to rebuild the sample yourself
+
+If you want to re-build the sample (while customizing it for your purposes), here is how its done:
+
 ```bash
 npm install @angular/cli@16.2.10 -g
 ng new remote_app_shell --prefix app-shell --routing --style scss
@@ -39,6 +51,16 @@ npx ng serve
 Point your browser to <http://localhost:3200/>
 
 ## Microfrontend
+
+### How to run the MFE1 sample
+
+```bash
+cd mfe1
+npm install
+npx ng serve
+```
+
+### How to rebuild the MFE sample yourself
 
 ```bash
 npm install @angular/cli@16.2.10 -g
